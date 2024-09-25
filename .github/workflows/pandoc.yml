@@ -21,27 +21,35 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y python3 python3-pip pandoc  # Install Pandoc
           pip3 install sphinx  # Install Sphinx
-          pip3 install git+https://github.com/wagtail/sphinx-wagtail-theme.git  # Install Wagtail theme
+          pip3 install git+https://${{ secrets.GITHUB_TOKEN }}:x-oauth-basic@github.com/sphinx-wagtail/sphinx-wagtail-theme.git
 
-      - name: Initialize Sphinx Documentation
+      - name: List Current Directory
         run: |
-          mkdir -p docs  # Create docs directory if it doesn't exist
-          cd docs
-          sphinx-quickstart -p "Your Project Name" -a "Your Name" -v "0.1" --quiet --no-batchfile --sep --makefile --lang "en"  # Adjust parameters as needed
+          ls -la  # List all files in the current directory
 
       - name: Convert .tex to .rst
         run: |
+          mkdir -p docs  # Create a docs directory if it doesn't exist
           pandoc main.tex -o docs/main.rst  # Convert your .tex file to .rst format
-          
+
+      - name: Check docs Directory
+        run: |
+          ls -la docs  # List contents of the docs directory
+
       - name: Build Sphinx Documentation
         run: |
           cd docs
-          # Make sure your conf.py is correctly configured
+          # Ensure your conf.py is correctly configured
           echo 'html_theme = "sphinx_wagtail_theme"' >> conf.py  # Set Wagtail theme
           echo 'html_theme_path = []' >> conf.py  # Set the theme path to default
 
           # Build the documentation
-          make html  # Build the documentation
+          make html
+
+      - name: List HTML Build Directory
+        run: |
+          cd docs
+          ls -la _build/html  # List contents of the HTML build directory
 
       - name: Commit and push to gh-pages
         run: |
