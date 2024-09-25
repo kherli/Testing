@@ -24,7 +24,7 @@ jobs:
 
       - name: Commit and push changes
         run: |
-          git config --local user.email "you@example.com"  # Replace with your email
+          git config --local user.email "katieh@unis.no"  # Replace with your email
           git config --local user.name "kherli"  # Replace with your name
           git add handbook.html
           git commit -m "Auto-generate HTML from .tex"
