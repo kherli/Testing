@@ -48,13 +48,11 @@ jobs:
           echo 'html_theme = "sphinx_material"' >> conf.py  # Set Material theme
           echo 'html_theme_path = ["_themes"]' >> conf.py  # Set the theme path
       
+          # Print conf.py contents to verify the configuration
+          cat conf.py  # Debugging step to print conf.py contents
+          
           # Build the documentation
           make html
-
-      - name: Print conf.py contents
-      run: |
-        cat docs/conf.py  # Print the contents of conf.py to check if theme is properly set
-
 
       - name: List HTML Build Directory
         run: |
