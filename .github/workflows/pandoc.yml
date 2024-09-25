@@ -1,4 +1,4 @@
-name: Generate Pandoc Files
+name: Generate Documentation with Sphinx
 
 on:
   push:
@@ -9,36 +9,46 @@ permissions:
   contents: write  # Grant write access to the GitHub Actions bot
 
 jobs:
-  pandoc:
+  sphinx:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Install Pandoc
+      - name: Install Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y pandoc
+          sudo apt-get install -y python3 python3-pip
+          pip3 install sphinx sphinx-wagtail
 
-      - name: Convert .tex to .html
+      - name: Convert .tex to .rst
         run: |
-          pandoc main.tex -o index.html  # Replace 'main.tex' with your actual file name
+          pandoc main.tex -o main.rst  # Convert your .tex file to .rst format
 
-      - name: List files in the repository
-        run: ls -la  # List files to ensure index.html is generated
+      - name: Build Sphinx Documentation
+        run: |
+          mkdir -p docs  # Create a docs directory if it doesn't exist
+          cp main.rst docs/  # Copy your .rst file to the docs directory
+          cd docs
+          sphinx-quickstart -q -p "Project Name" -a "Your Name" -v "1.0" .  # Quickstart Sphinx project (if not done already)
+          echo 'html_theme = "sphinx_wagtail_theme"' >> conf.py  # Set Wagtail theme
+          make html  # Build the documentation
 
-      - name: Commit and push HTML to gh-pages branch
+      - name: Commit and push to gh-pages
         run: |
           git config --local user.email "katieh@unis.no"  # Your email
           git config --local user.name "kherli"  # Your name
-          
+
           # Create or switch to gh-pages branch
           git checkout -B gh-pages  # Creates the branch if it doesn't exist or resets it
 
+          # Copy generated HTML to the root of the gh-pages branch
+          cp -R docs/_build/html/* ./  # Copies the built files
+
           # Add and commit the changes
-          git add index.html
-          git commit -m "Deploy HTML to GitHub Pages" || echo "No changes to commit"  # Prevent errors if no changes
+          git add .
+          git commit -m "Deploy Sphinx documentation" || echo "No changes to commit"  # Prevent errors if no changes
 
           # Push changes to the gh-pages branch
           git push --force origin gh-pages  # Use --force to overwrite if needed
