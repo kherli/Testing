@@ -31,6 +31,9 @@ jobs:
       - name: Create docs/source Directory
         run: mkdir -p docs/source  # Create a docs/source directory if it doesn't exist
 
+      - name: Clean Existing Sphinx Files
+        run: rm -rf docs/conf.py docs/index.rst docs/source docs/Makefile docs/Makefile  # Adjust as necessary to remove Sphinx files
+
       - name: Initialize Sphinx Documentation
         run: |
           cd docs
