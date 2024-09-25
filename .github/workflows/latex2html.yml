@@ -25,6 +25,9 @@ jobs:
       - name: Verify Installed Packages
         run: pip3 list  # This will list all installed Python packages
 
+      - name: Clean Build Directory
+        run: rm -rf docs/build/html  # Clean previous builds
+        
       - name: Create docs/source Directory
         run: mkdir -p docs/source  # Create a docs/source directory if it doesn't exist
 
