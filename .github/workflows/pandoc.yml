@@ -3,7 +3,7 @@ name: Generate Pandoc Files
 on:
   push:
     branches:
-      - main  # Change this if your default branch is not 'main'
+      - main  # Trigger the workflow on pushes to the main branch
 
 permissions:
   contents: write  # Grant write access to the GitHub Actions bot
@@ -25,12 +25,22 @@ jobs:
         run: |
           pandoc main.tex -o handbook.html  # Replace 'main.tex' with your actual file name
 
-      - name: Commit and push changes
+      - name: Commit and push HTML to gh-pages branch
         run: |
-          git config --local user.email "katieh@unis.no"  # Replace with your email
-          git config --local user.name "kherli"  # Replace with your name
+          git config --local user.email "katieh@unis.no"  # Your email
+          git config --local user.name "kherli"  # Your name
+          
+          # Create or switch to gh-pages branch
+          git checkout -B gh-pages  # Creates the branch if it doesn't exist or resets it
+
+          # Copy the generated HTML file to the gh-pages branch
+          cp handbook.html ./  # Ensure the file path is correct
+
+          # Add and commit the changes
           git add handbook.html
-          git commit -m "Auto-generate HTML from .tex" || echo "No changes to commit"  # Avoid error if nothing changed
-          git push
+          git commit -m "Deploy HTML to GitHub Pages" || echo "No changes to commit"  # Prevent errors if no changes
+
+          # Push changes to the gh-pages branch
+          git push --force origin gh-pages  # Use --force to overwrite if needed
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Use the GitHub token for authentication
