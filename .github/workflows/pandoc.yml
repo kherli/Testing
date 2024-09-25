@@ -37,6 +37,17 @@ jobs:
         run: |
           pandoc main.tex -o docs/main.rst  # Convert your .tex file to .rst format
 
+      - name: Create Master Document (index.rst)
+        run: |
+          echo "Welcome to My Project's documentation!" > docs/index.rst
+          echo "" >> docs/index.rst
+          echo ".. toctree::" >> docs/index.rst
+          echo "   :maxdepth: 2" >> docs/index.rst
+          echo "   :caption: Contents:" >> docs/index.rst
+          echo "" >> docs/index.rst
+          echo "   main" >> docs/index.rst  # Ensure 'main' is included
+
+
       - name: Check docs Directory
         run: |
           ls -la docs  # List contents of the docs directory
