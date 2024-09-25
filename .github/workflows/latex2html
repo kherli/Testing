@@ -32,7 +32,7 @@ jobs:
 
       - name: Convert LaTeX to RST
         run: |
-          pandoc main.tex -o docs/main.rst  # Convert your LaTeX file to RST format
+          pandoc main.tex -o docs/source/main.rst  # Convert your LaTeX file to RST format
 
       - name: Create Master Document (index.rst)
         run: |
