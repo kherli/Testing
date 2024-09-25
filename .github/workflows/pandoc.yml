@@ -33,16 +33,6 @@ jobs:
           cd docs
           sphinx-quickstart --quiet --sep --project="My Project" --author="Your Name" --release="0.1" --language="en" --makefile
 
-      - name: Create Master Document (index.rst)
-        run: |
-          echo "Welcome to My Project's documentation!" > docs/index.rst
-          echo "" >> docs/index.rst
-          echo ".. toctree::" >> docs/index.rst
-          echo "   :maxdepth: 2" >> docs/index.rst
-          echo "   :caption: Contents:" >> docs/index.rst
-          echo "" >> docs/index.rst
-          echo "   main" >> docs/index.rst  # Add main.rst to the index.rst toc tree
-
       - name: Convert .tex to .rst
         run: |
           pandoc main.tex -o docs/main.rst  # Convert your .tex file to .rst format
