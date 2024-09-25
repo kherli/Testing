@@ -21,15 +21,20 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y python3 python3-pip pandoc  # Install Pandoc
           pip3 install sphinx  # Install Sphinx
-          pip install sphinx-material
+          pip install sphinx-material  # Install Material theme
 
       - name: List Current Directory
         run: |
           ls -la  # List all files in the current directory
 
-      - name: Convert .tex to .rst
+      - name: Initialize Sphinx Documentation
         run: |
           mkdir -p docs  # Create a docs directory if it doesn't exist
+          cd docs
+          sphinx-quickstart --quiet --sep --project="My Project" --author="Your Name" --release="0.1" --language="en" --makefile --windows-help
+
+      - name: Convert .tex to .rst
+        run: |
           pandoc main.tex -o docs/main.rst  # Convert your .tex file to .rst format
 
       - name: Check docs Directory
