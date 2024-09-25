@@ -33,6 +33,16 @@ jobs:
           cd docs
           sphinx-quickstart --quiet --sep --project="My Project" --author="Your Name" --release="0.1" --language="en" --makefile
 
+      - name: Create Master Document (index.rst)
+        run: |
+          echo "Welcome to My Project's documentation!" > docs/index.rst
+          echo "" >> docs/index.rst
+          echo ".. toctree::" >> docs/index.rst
+          echo "   :maxdepth: 2" >> docs/index.rst
+          echo "   :caption: Contents:" >> docs/index.rst
+          echo "" >> docs/index.rst
+          echo "   main" >> docs/index.rst  # Add main.rst to the index.rst toc tree
+
       - name: Convert .tex to .rst
         run: |
           pandoc main.tex -o docs/main.rst  # Convert your .tex file to .rst format
@@ -46,14 +56,12 @@ jobs:
           cd docs
           # Ensure your conf.py is correctly configured
           echo 'html_theme = "sphinx_material"' >> conf.py  # Set Material theme
+          echo 'extensions = ["sphinx.ext.imgmath"]' >> conf.py  # Enable LaTeX for images
           echo 'html_theme_path = ["_themes"]' >> conf.py  # Set the theme path
-      
+          
           # Print conf.py contents to verify the configuration
           cat conf.py  # Debugging step to print conf.py contents
-
-          # Build the documentation and capture any warnings or errors
-          sphinx-build -b html . build/html -v -w sphinx_warnings.log || cat sphinx_warnings.log
-
+          
           # Build the documentation
           make html
 
@@ -61,6 +69,11 @@ jobs:
         run: |
           cd docs
           ls -la build/html  # List contents of the HTML build directory
+
+      - name: Check for frog.jpg
+        run: |
+          cd docs
+          find . -name "frog.jpg"  # Search for frog.jpg in docs directory
 
       - name: Commit and push to gh-pages
         run: |
@@ -80,4 +93,4 @@ jobs:
           # Push changes to the gh-pages branch
           git push --force origin gh-pages  # Use --force to overwrite if needed
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Use the GitHub token for authentication
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN
