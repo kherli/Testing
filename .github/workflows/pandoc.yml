@@ -23,33 +23,62 @@ jobs:
           pip3 install sphinx  # Install Sphinx
           pip install sphinx-material  # Install Material theme
 
+      - name: List Current Directory
+        run: |
+          ls -la  # List all files in the current directory
+
       - name: Initialize Sphinx Documentation
         run: |
           mkdir -p docs  # Create a docs directory if it doesn't exist
           cd docs
           sphinx-quickstart --quiet --sep --project="My Project" --author="Your Name" --release="0.1" --language="en" --makefile
 
-      - name: Add Minimal Content to index.rst
+      - name: Create Master Document (index.rst)
         run: |
-          echo "Welcome to the Documentation!" > docs/index.rst
+          echo "Welcome to My Project's documentation!" > docs/index.rst
           echo "" >> docs/index.rst
-          echo "This is a simple test to see if content is rendering correctly." >> docs/index.rst
+          echo ".. toctree::" >> docs/index.rst
+          echo "   :maxdepth: 2" >> docs/index.rst
+          echo "   :caption: Contents:" >> docs/index.rst
+          echo "" >> docs/index.rst
+          echo "   main" >> docs/index.rst  # Add main.rst to the index.rst toc tree
+
+      - name: Convert .tex to .rst
+        run: |
+          pandoc main.tex -o docs/main.rst  # Convert your .tex file to .rst format
+
+      - name: Check docs Directory
+        run: |
+          ls -la docs  # List contents of the docs directory
 
       - name: Build Sphinx Documentation
         run: |
           cd docs
+          # Ensure your conf.py is correctly configured
           echo 'html_theme = "sphinx_material"' >> conf.py  # Set Material theme
-          echo 'master_doc = "index"' >> conf.py  # Set master doc
-          make html SPHINXOPTS="-v"  # Verbose mode for detailed logs
+          echo 'extensions = ["sphinx.ext.imgmath"]' >> conf.py  # Enable LaTeX for images
+          #echo 'html_theme_path = ["_themes"]' >> conf.py  # Set the theme path
+          
+          # Print conf.py contents to verify the configuration
+          cat conf.py  # Debugging step to print conf.py contents
+          
+          # Build the documentation
+          make html SPHINXOPTS="-v"
+
+      - name: List HTML Build Directory
+        run: |
+          cd docs
+          ls -la build/html  # List contents of the HTML build directory
 
       - name: Check Generated HTML Content
         run: |
-          cat docs/build/html/index.html  # Output the contents of index.html for inspection
+          cat docs/build/html/index.html  # Output the contents of the index.html for inspection
 
-      - name: Verify Build Output
+
+      - name: Check for frog.jpg
         run: |
-          cd docs/build/html
-          ls -la  # List the contents of the HTML build directory, ensuring files are present
+          cd docs
+          find . -name "frog.jpg"  # Search for frog.jpg in docs directory
 
       - name: Commit and push to gh-pages
         run: |
