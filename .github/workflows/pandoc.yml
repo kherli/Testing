@@ -47,10 +47,9 @@ jobs:
         run: |
           pandoc main.tex -o docs/main.rst  # Convert your .tex file to .rst format
 
-      - name: Debug conf.py
+      - name: Check docs Directory
         run: |
-          cd docs
-          cat conf.py  # Print the contents of conf.py for inspection
+          ls -la docs  # List contents of the docs directory
 
       - name: Build Sphinx Documentation
         run: |
@@ -60,13 +59,21 @@ jobs:
           echo 'extensions = ["sphinx.ext.imgmath"]' >> conf.py  # Enable LaTeX for images
           echo 'html_theme_path = ["_themes"]' >> conf.py  # Set the theme path
           
-          # Build the documentation with verbosity to get detailed logs
-          make html SPHINXOPTS="-v"  # Verbose mode for more detailed logs
+          # Print conf.py contents to verify the configuration
+          cat conf.py  # Debugging step to print conf.py contents
+          
+          # Build the documentation
+          make html
 
-      - name: Verify Build Output
+      - name: List HTML Build Directory
         run: |
-          cd docs/_build/html
-          ls -la  # List the contents of the HTML build directory, ensuring files are present
+          cd docs
+          ls -la build/html  # List contents of the HTML build directory
+
+      - name: Check for frog.jpg
+        run: |
+          cd docs
+          find . -name "frog.jpg"  # Search for frog.jpg in docs directory
 
       - name: Commit and push to gh-pages
         run: |
@@ -77,7 +84,7 @@ jobs:
           git checkout -B gh-pages  # Creates the branch if it doesn't exist or resets it
 
           # Copy generated HTML to the root of the gh-pages branch
-          cp -R docs/_build/html/* ./  # Copies the built files
+          cp -R docs/build/html/* ./  # Copies the built files
 
           # Add and commit the changes
           git add .
