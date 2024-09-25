@@ -72,22 +72,22 @@ jobs:
           cd docs
           cat build/html/index.html  # Output the contents of the index.html for inspection
 
-      - name: Commit and push to gh-pages
+      - name: Commit and push to main
         run: |
           git config --local user.email "katieh@unis.no"  # Your email
           git config --local user.name "kherli"  # Your name
 
-          # Create or switch to gh-pages branch
-          git checkout -B gh-pages  # Creates the branch if it doesn't exist or resets it
+          # Make sure we're on the main branch
+          git checkout main  # Switch to the main branch
 
-          # Copy generated HTML to the root of the gh-pages branch
+          # Copy generated HTML to the main branch
           cp -R docs/build/html/* ./  # Copies the built files
 
           # Add and commit the changes
           git add .
           git commit -m "Deploy Sphinx documentation" || echo "No changes to commit"  # Prevent errors if no changes
 
-          # Push changes to the gh-pages branch
-          git push --force origin gh-pages  # Use --force to overwrite if needed
+          # Push changes to the main branch
+          git push origin main  # Push to the main branch
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Use the GitHub token for authentication
