@@ -70,6 +70,11 @@ jobs:
           cd docs
           ls -la build/html  # List contents of the HTML build directory
 
+      - name: Check Generated HTML Content
+        run: |
+          cat docs/build/html/index.html  # Output the contents of the index.html for inspection
+
+
       - name: Check for frog.jpg
         run: |
           cd docs
