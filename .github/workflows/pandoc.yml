@@ -50,7 +50,10 @@ jobs:
       
           # Print conf.py contents to verify the configuration
           cat conf.py  # Debugging step to print conf.py contents
-          
+
+          # Build the documentation and capture any warnings or errors
+          sphinx-build -b html . build/html -v -w sphinx_warnings.log || cat sphinx_warnings.log
+
           # Build the documentation
           make html
 
