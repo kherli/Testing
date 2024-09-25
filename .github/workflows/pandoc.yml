@@ -5,6 +5,9 @@ on:
     branches:
       - main  # Change this if your default branch is not 'main'
 
+permissions:
+  contents: write  # Grant write access to the GitHub Actions bot
+
 jobs:
   pandoc:
     runs-on: ubuntu-latest
@@ -20,14 +23,14 @@ jobs:
 
       - name: Convert .tex to .html
         run: |
-          pandoc main.tex -o handbook.html  # Replace 'yourfile.tex' with your actual file name
+          pandoc main.tex -o handbook.html  # Replace 'main.tex' with your actual file name
 
       - name: Commit and push changes
         run: |
           git config --local user.email "katieh@unis.no"  # Replace with your email
           git config --local user.name "kherli"  # Replace with your name
           git add handbook.html
-          git commit -m "Auto-generate HTML from .tex"
+          git commit -m "Auto-generate HTML from .tex" || echo "No changes to commit"  # Avoid error if nothing changed
           git push
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Use the GitHub token for authentication
