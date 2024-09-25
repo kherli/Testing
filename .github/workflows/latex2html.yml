@@ -67,8 +67,8 @@ jobs:
 
       - name: Commit and push to gh-pages
         run: |
-          git config --local user.email "youremail@example.com"  # Your email
-          git config --local user.name "Your Name"  # Your name
+          git config --local user.email "katieh@unis.no"  # Your email
+          git config --local user.name "kherli"  # Your name
 
           # Create or switch to gh-pages branch
           git checkout -B gh-pages  # Creates the branch if it doesn't exist or resets it
