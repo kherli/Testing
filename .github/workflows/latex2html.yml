@@ -20,7 +20,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y python3 python3-pip pandoc  # Install Pandoc
-          pip3 install sphinx sphinx-wagtail  # Install Sphinx and Material theme
+          pip3 install sphinx sphinx-wagtail-theme  # Install Sphinx and Material theme
 
       - name: Verify Installed Packages
         run: pip3 list  # This will list all installed Python packages
