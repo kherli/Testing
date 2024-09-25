@@ -51,6 +51,11 @@ jobs:
           # Build the documentation
           make html
 
+      - name: Print conf.py contents
+      run: |
+        cat docs/conf.py  # Print the contents of conf.py to check if theme is properly set
+
+
       - name: List HTML Build Directory
         run: |
           cd docs
