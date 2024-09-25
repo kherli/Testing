@@ -19,8 +19,8 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y python3 python3-pip
-          pip3 install sphinx sphinx-wagtail-theme
+          sudo apt-get install -y python3 python3-pip pandoc  # Install Pandoc here
+          pip3 install sphinx sphinx-wagtail-theme  # Install Sphinx and Wagtail theme
 
       - name: Convert .tex to .rst
         run: |
@@ -31,7 +31,7 @@ jobs:
           mkdir -p docs  # Create a docs directory if it doesn't exist
           cp main.rst docs/  # Copy your .rst file to the docs directory
           cd docs
-          sphinx-quickstart -q -p "Hanbook" -a "ARCTICS" -v "1.0" .  # Quickstart Sphinx project (if not done already)
+          sphinx-quickstart -q -p "Project Name" -a "Your Name" -v "1.0" .  # Quickstart Sphinx project (if not done already)
           echo 'html_theme = "sphinx_wagtail_theme"' >> conf.py  # Set Wagtail theme
           make html  # Build the documentation
 
