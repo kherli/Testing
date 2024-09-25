@@ -20,13 +20,13 @@ jobs:
 
       - name: Convert .tex to .html
         run: |
-          pandoc main.tex -o yourfile.html  # Replace 'yourfile.tex' with your actual file name
+          pandoc main.tex -o handbook.html  # Replace 'yourfile.tex' with your actual file name
 
       - name: Commit and push changes
         run: |
           git config --local katieh@unis.no "you@example.com"  # Replace with your email
           git config --local kherli "Your Name"  # Replace with your name
-          git add yourfile.html
+          git add handbook.html
           git commit -m "Auto-generate HTML from .tex"
           git push
         env:
