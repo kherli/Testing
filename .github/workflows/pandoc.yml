@@ -57,7 +57,7 @@ jobs:
           # Ensure your conf.py is correctly configured
           echo 'html_theme = "sphinx_material"' >> conf.py  # Set Material theme
           echo 'extensions = ["sphinx.ext.imgmath"]' >> conf.py  # Enable LaTeX for images
-          echo 'html_theme_path = ["_themes"]' >> conf.py  # Set the theme path
+          #echo 'html_theme_path = ["_themes"]' >> conf.py  # Set the theme path
           
           # Print conf.py contents to verify the configuration
           cat conf.py  # Debugging step to print conf.py contents
