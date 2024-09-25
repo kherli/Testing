@@ -23,10 +23,10 @@ jobs:
 
       - name: Convert .tex to .html
         run: |
-          pandoc main.tex -o handbook.html  # Replace 'main.tex' with your actual file name
+          pandoc main.tex -o index.html  # Replace 'main.tex' with your actual file name
 
       - name: List files in the repository
-        run: ls -la  # List files to ensure handbook.html is generated
+        run: ls -la  # List files to ensure index.html is generated
 
       - name: Commit and push HTML to gh-pages branch
         run: |
@@ -37,7 +37,7 @@ jobs:
           git checkout -B gh-pages  # Creates the branch if it doesn't exist or resets it
 
           # Add and commit the changes
-          git add handbook.html
+          git add index.html
           git commit -m "Deploy HTML to GitHub Pages" || echo "No changes to commit"  # Prevent errors if no changes
 
           # Push changes to the gh-pages branch
