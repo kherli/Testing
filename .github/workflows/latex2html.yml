@@ -20,7 +20,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y python3 python3-pip pandoc  # Install Pandoc
-          pip3 install sphinx sphinx-material  # Install Sphinx and Material theme
+          pip3 install sphinx sphinx-wagtail  # Install Sphinx and Material theme
 
       - name: Verify Installed Packages
         run: pip3 list  # This will list all installed Python packages
@@ -52,8 +52,8 @@ jobs:
 
       - name: Configure Sphinx
         run: |
-          echo 'html_theme = "sphinx_material"' >> docs/conf.py  # Set Material theme
-          echo 'extensions = ["sphinx.ext.imgmath, "sphinx_material""]' >> docs/conf.py  # Enable LaTeX for images
+          echo 'html_theme = "sphinx_wagtail"' >> docs/conf.py  # Set Material theme
+          echo 'extensions = ["sphinx.ext.imgmath, "sphinx_wagtail""]' >> docs/conf.py  # Enable LaTeX for images
           echo 'html_theme_options = {"nav_title": "My Project", "color_primary": "indigo", "color_accent": "pink"}' >> docs/conf.py
           echo 'master_doc = "index"' >> docs/conf.py  # Set the master document
 
