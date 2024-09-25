@@ -31,7 +31,7 @@ jobs:
         run: |
           mkdir -p docs  # Create a docs directory if it doesn't exist
           cd docs
-          sphinx-quickstart --quiet --sep --project="My Project" --author="Your Name" --release="0.1" --language="en" --makefile --windows-help
+          sphinx-quickstart --quiet --sep --project="My Project" --author="Your Name" --release="0.1" --language="en" --makefile
 
       - name: Convert .tex to .rst
         run: |
