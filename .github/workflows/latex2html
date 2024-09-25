@@ -28,7 +28,7 @@ jobs:
       - name: Initialize Sphinx Documentation
         run: |
           cd docs
-          sphinx-quickstart --quiet --sep --project="My Project" --author="Your Name" --release="0.1" --language="en" --makefile
+          sphinx-quickstart --quiet --sep --project="Handbook" --author="ARCTICS" --release="0.1" --language="en" --makefile
 
       - name: Convert LaTeX to RST
         run: |
