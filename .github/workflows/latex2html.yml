@@ -20,7 +20,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y python3 python3-pip pandoc  # Install Pandoc
-          pip3 install sphinx sphinx-wagtail-theme  # Install Sphinx and Material theme
+          pip3 install sphinx sphinx-material  # Install Sphinx and Material theme
 
       - name: Verify Installed Packages
         run: pip3 list  # This will list all installed Python packages
@@ -30,9 +30,6 @@ jobs:
         
       - name: Create docs/source Directory
         run: mkdir -p docs/source  # Create a docs/source directory if it doesn't exist
-
-      - name: Clean Existing Sphinx Files
-        run: rm -rf docs/conf.py docs/index.rst docs/source docs/Makefile docs/Makefile  # Adjust as necessary to remove Sphinx files
 
       - name: Initialize Sphinx Documentation
         run: |
@@ -55,8 +52,8 @@ jobs:
 
       - name: Configure Sphinx
         run: |
-          echo 'html_theme = "sphinx_wagtail_theme"' >> docs/conf.py  # Set Material theme
-          echo 'extensions = ["sphinx.ext.imgmath, "sphinx_wagtail_theme""]' >> docs/conf.py  # Enable LaTeX for images
+          echo 'html_theme = "sphinx_material"' >> docs/conf.py  # Set Material theme
+          echo 'extensions = ["sphinx.ext.imgmath, "sphinx_material""]' >> docs/conf.py  # Enable LaTeX for images
           echo 'html_theme_options = {"nav_title": "My Project", "color_primary": "indigo", "color_accent": "pink"}' >> docs/conf.py
           echo 'master_doc = "index"' >> docs/conf.py  # Set the master document
 
@@ -75,22 +72,22 @@ jobs:
           cd docs
           cat build/html/index.html  # Output the contents of the index.html for inspection
 
-      - name: Commit and push to main
+      - name: Commit and push to gh-pages
         run: |
           git config --local user.email "katieh@unis.no"  # Your email
           git config --local user.name "kherli"  # Your name
 
-          # Make sure we're on the main branch
-          git checkout main  # Switch to the main branch
+          # Create or switch to gh-pages branch
+          git checkout -B gh-pages  # Creates the branch if it doesn't exist or resets it
 
-          # Copy generated HTML to the main branch
+          # Copy generated HTML to the root of the gh-pages branch
           cp -R docs/build/html/* ./  # Copies the built files
 
           # Add and commit the changes
           git add .
           git commit -m "Deploy Sphinx documentation" || echo "No changes to commit"  # Prevent errors if no changes
 
-          # Push changes to the main branch
-          git push origin main  # Push to the main branch
+          # Push changes to the gh-pages branch
+          git push --force origin gh-pages  # Use --force to overwrite if needed
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Use the GitHub token for authentication
