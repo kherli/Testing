@@ -42,7 +42,7 @@ jobs:
           echo "   :maxdepth: 2" >> docs/index.rst
           echo "   :caption: Contents:" >> docs/index.rst
           echo "" >> docs/index.rst
-          echo "   main" >> docs/index.rst  # Add main.rst to the index.rst toc tree
+          echo "   source/main" >> docs/index.rst  # Ensure it points to the correct path for main.rst
 
       - name: Configure Sphinx
         run: |
