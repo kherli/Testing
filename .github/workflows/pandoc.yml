@@ -23,7 +23,7 @@ jobs:
           pip3 install sphinx  # Install Sphinx
           
           # Install Sphinx Wagtail theme using the GitHub token for authentication
-          pip3 install git+https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/sphinx-wagtail/sphinx-wagtail-theme.git
+          pip3 install git+https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/wagtail/sphinx-wagtail-theme
 
       - name: Convert .tex to .rst
         run: |
