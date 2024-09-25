@@ -63,7 +63,7 @@ jobs:
           cat conf.py  # Debugging step to print conf.py contents
           
           # Build the documentation
-          make html
+          make html SPHINXOPTS="-v"
 
       - name: List HTML Build Directory
         run: |
