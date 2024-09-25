@@ -59,6 +59,16 @@ jobs:
           echo 'html_theme_options = {"nav_title": "My Project", "color_primary": "indigo", "color_accent": "pink"}' >> docs/source/conf.py
           echo 'master_doc = "index"' >> docs/source/conf.py  # Set the master document
 
+      - name: Copy Static Files
+        run: |
+          # Make sure the static folder exists
+          mkdir -p docs/build/html/_static/stylesheets
+          mkdir -p docs/build/html/_static/fonts
+          
+          # Copy static files to the correct directory
+          cp -R docs/source/_static/* docs/build/html/_static/  # Copy static files to the build directory
+
+
       - name: Build Sphinx Documentation
         run: |
           cd docs
