@@ -20,7 +20,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y python3 python3-pip pandoc  # Install Pandoc
-          pip3 install sphinx sphinx-wagtail-theme  # Install Sphinx and Wagtail theme
+          pip3 install git+https://github.com/sphinx-wagtail/sphinx-wagtail-theme.git
 
       - name: Convert .tex to .rst
         run: |
