@@ -21,7 +21,6 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y python3 python3-pip pandoc  # Install Pandoc
           pip3 install sphinx  # Install Sphinx
-          #pip3 install git+https://${{ secrets.GITHUB_TOKEN }}:x-oauth-basic@github.com/wagtail/sphinx-wagtail-theme.git
           pip install sphinx-material
 
       - name: List Current Directory
@@ -41,9 +40,9 @@ jobs:
         run: |
           cd docs
           # Ensure your conf.py is correctly configured
-          echo 'html_theme = "sphinx_wagtail_theme"' >> conf.py  # Set Wagtail theme
-          echo 'html_theme_path = []' >> conf.py  # Set the theme path to default
-
+          echo 'html_theme = "sphinx_material"' >> conf.py  # Set Material theme
+          echo 'html_theme_path = ["_themes"]' >> conf.py  # Set the theme path
+      
           # Build the documentation
           make html
 
