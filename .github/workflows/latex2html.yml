@@ -27,7 +27,7 @@ jobs:
 
       - name: Clean Build Directory
         run: rm -rf docs/build/html  # Clean previous builds
-        
+
       - name: Create docs/source Directory
         run: mkdir -p docs/source  # Create a docs/source directory if it doesn't exist
 
@@ -49,25 +49,17 @@ jobs:
           echo "   :caption: Contents:" >> docs/index.rst
           echo "" >> docs/index.rst
           echo "   source/main" >> docs/index.rst  # Ensure it points to the correct path for main.rst
-          echo 'html_static_path = ["_static"]' >> docs/source/conf.py  # Add the static path to Sphinx config
-
 
       - name: Configure Sphinx
         run: |
           echo 'html_theme = "sphinx_material"' >> docs/source/conf.py  # Set Material theme
           echo 'extensions = ["sphinx.ext.imgmath", "sphinx_material"]' >> docs/source/conf.py  # Enable LaTeX for images
-          echo 'html_theme_options = {"nav_title": "My Project", "color_primary": "indigo", "color_accent": "pink"}' >> docs/source/conf.py
+          echo 'html_theme_options = {"nav_title": "Handbook", "color_primary": "indigo", "color_accent": "pink", "repo_url": "https://github.com/YOUR_REPO", "repo_name": "Handbook"}' >> docs/source/conf.py
+          echo 'html_static_path = ["_static"]' >> docs/source/conf.py  # Specify the static path
           echo 'master_doc = "index"' >> docs/source/conf.py  # Set the master document
 
-      - name: Copy Static Files
-        run: |
-          # Make sure the static folder exists
-          mkdir -p docs/build/html/_static/stylesheets
-          mkdir -p docs/build/html/_static/fonts
-          
-          # Copy static files to the correct directory
-          cp -R docs/source/_static/* docs/build/html/_static/  # Copy static files to the build directory
-
+      - name: Ensure _static Directory Exists
+        run: mkdir -p docs/source/_static  # Create _static directory if it doesn't exist
 
       - name: Build Sphinx Documentation
         run: |
