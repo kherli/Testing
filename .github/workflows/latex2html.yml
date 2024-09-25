@@ -49,6 +49,8 @@ jobs:
           echo "   :caption: Contents:" >> docs/index.rst
           echo "" >> docs/index.rst
           echo "   source/main" >> docs/index.rst  # Ensure it points to the correct path for main.rst
+          echo 'html_static_path = ["_static"]' >> docs/source/conf.py  # Add the static path to Sphinx config
+
 
       - name: Configure Sphinx
         run: |
