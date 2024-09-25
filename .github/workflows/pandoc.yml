@@ -54,7 +54,7 @@ jobs:
       - name: List HTML Build Directory
         run: |
           cd docs
-          ls -la _build/html  # List contents of the HTML build directory
+          ls -la build/html  # List contents of the HTML build directory
 
       - name: Commit and push to gh-pages
         run: |
