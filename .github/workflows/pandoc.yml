@@ -21,16 +21,18 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y python3 python3-pip pandoc  # Install Pandoc
           pip3 install sphinx  # Install Sphinx
-          
-          # Install Sphinx Wagtail theme using the GitHub token for authentication
-          pip3 install git+https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/wagtail/sphinx-wagtail-theme
+          pip3 install git+https://github.com/wagtail/sphinx-wagtail-theme.git  # Install Wagtail theme
+
+      - name: Initialize Sphinx Documentation
+        run: |
+          mkdir -p docs  # Create docs directory if it doesn't exist
+          cd docs
+          sphinx-quickstart -p "Your Project Name" -a "Your Name" -v "0.1" --quiet --no-batchfile --sep --makefile --lang "en"  # Adjust parameters as needed
 
       - name: Convert .tex to .rst
         run: |
-          pandoc main.tex -o main.rst  # Convert your .tex file to .rst format
-          mkdir -p docs  # Create a docs directory if it doesn't exist
-          cp main.rst docs/  # Copy your .rst file to the docs directory
-
+          pandoc main.tex -o docs/main.rst  # Convert your .tex file to .rst format
+          
       - name: Build Sphinx Documentation
         run: |
           cd docs
