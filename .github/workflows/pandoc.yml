@@ -25,6 +25,9 @@ jobs:
         run: |
           pandoc main.tex -o handbook.html  # Replace 'main.tex' with your actual file name
 
+      - name: List files in the repository
+        run: ls -la  # List files to ensure handbook.html is generated
+
       - name: Commit and push HTML to gh-pages branch
         run: |
           git config --local user.email "katieh@unis.no"  # Your email
@@ -32,9 +35,6 @@ jobs:
           
           # Create or switch to gh-pages branch
           git checkout -B gh-pages  # Creates the branch if it doesn't exist or resets it
-
-          # Copy the generated HTML file to the gh-pages branch
-          cp handbook.html ./  # Ensure the file path is correct
 
           # Add and commit the changes
           git add handbook.html
