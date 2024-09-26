@@ -19,10 +19,13 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt-get update
-          # Install a compatible version of Pandoc
-          sudo apt-get install -y pandoc=2.14.1-1  # Adjust the version if needed
-          sudo apt-get install -y python3 python3-pip pandoc-citeproc  # Install other required packages
-          pip3 install sphinx sphinx-wagtail-theme sphinxcontrib-bibtex  # Install Sphinx and BibTeX extension
+          # Install required packages
+          sudo apt-get install -y python3 python3-pip pandoc-citeproc wget  # Install Python, pip, and pandoc-citeproc
+
+          # Install the latest stable version of Pandoc
+          wget https://github.com/jgm/pandoc/releases/latest/download/pandoc-*.deb
+          sudo dpkg -i pandoc-*.deb
+          sudo apt-get install -f  # Fix any dependency issues
 
       - name: Install pandoc-crossref
         run: |
