@@ -20,10 +20,19 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y python3 python3-pip pandoc pandoc-citeproc  # Install Pandoc and pandoc-citeproc
-          pip3 install sphinx sphinx-wagtail-theme sphinxcontrib-bibtex pandoc-crossref  # Install Sphinx, BibTeX extension, and pandoc-crossref
+          pip3 install sphinx sphinx-wagtail-theme sphinxcontrib-bibtex  # Install Sphinx and BibTeX extension
+
+      - name: Install pandoc-crossref
+        run: |
+          wget https://github.com/lierdakil/pandoc-crossref/releases/download/v0.3.12.0b/pandoc-crossref-Linux.tar.xz  # Download pandoc-crossref
+          tar -xf pandoc-crossref-Linux.tar.xz  # Extract it
+          sudo mv pandoc-crossref /usr/local/bin/  # Move it to the bin directory
 
       - name: Verify Installed Packages
-        run: pip3 list  # This will list all installed Python packages
+        run: |
+          pandoc --version  # Verify Pandoc installation
+          pandoc-crossref --version  # Verify pandoc-crossref installation
+          pip3 list  # List installed Python packages
 
       - name: Clean Build Directory
         run: rm -rf docs/build/html  # Clean previous builds
