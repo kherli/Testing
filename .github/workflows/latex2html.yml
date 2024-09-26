@@ -62,14 +62,6 @@ jobs:
       - name: Ensure _static Directory Exists
         run: mkdir -p docs/source/_static  # Create _static directory if it doesn't exist
 
-      - name: Copy Static Files
-        run: |
-          # If you have specific static files, copy them into the _static directory
-          # cp path/to/static/files/* docs/source/_static/
-
-          # Ensure the _static directory is also copied to the build output
-          cp -R docs/source/_static/* docs/build/html/_static/  # Copy static files to the HTML build
-
       - name: Build Sphinx Documentation
         run: |
           cd docs
