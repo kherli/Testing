@@ -20,7 +20,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y python3 python3-pip pandoc  # Install Pandoc
-          pip3 install sphinx sphinx-material  # Install Sphinx and Material theme
+          pip3 install sphinx sphinx-wagtail-theme  # Install Sphinx and Wagtail theme
 
       - name: Verify Installed Packages
         run: pip3 list  # This will list all installed Python packages
@@ -52,9 +52,9 @@ jobs:
 
       - name: Configure Sphinx
         run: |
-          echo 'html_theme = "sphinx_material"' >> docs/source/conf.py  # Set Material theme
-          echo 'extensions = ["sphinx.ext.imgmath", "sphinx_material"]' >> docs/source/conf.py  # Enable LaTeX for images
-          echo 'html_theme_options = {"nav_title": "Handbook", "color_primary": "indigo", "color_accent": "pink", "repo_url": "https://github.com/bashtage/sphinx-material/", "repo_name": "Handbook"}' >> docs/source/conf.py
+          echo 'extensions.append("sphinx_wagtail_theme")' >> docs/source/conf.py  # Enable Wagtail theme
+          echo 'html_theme = "sphinx_wagtail_theme"' >> docs/source/conf.py  # Set Wagtail theme
+          echo 'extensions = ["sphinx.ext.imgmath", "sphinx_wagtail_theme"]' >> docs/source/conf.py  # Enable LaTeX for images
           echo 'html_static_path = ["_static"]' >> docs/source/conf.py  # Specify the static path
           echo 'html_baseurl = "https://kherli.github.io/Testing/"' >> docs/source/conf.py  # Add the base URL for GitHub Pages
           echo 'master_doc = "index"' >> docs/source/conf.py  # Set the master document
