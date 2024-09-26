@@ -48,7 +48,7 @@ jobs:
           echo "   :maxdepth: 2" >> docs/source/index.rst
           echo "   :caption: Contents:" >> docs/source/index.rst
           echo "" >> docs/source/index.rst
-          echo "   source/main" >> docs/source/index.rst  # Ensure it points to the correct path for main.rst
+          echo "   main" >> docs/source/index.rst  # Ensure it points to the correct path for main.rst
 
       - name: Configure Sphinx
         run: |
@@ -62,6 +62,14 @@ jobs:
       - name: Ensure _static Directory Exists
         run: mkdir -p docs/source/_static  # Create _static directory if it doesn't exist
 
+      - name: Copy Static Files
+        run: |
+          # If you have specific static files, copy them into the _static directory
+          # cp path/to/static/files/* docs/source/_static/
+
+          # Ensure the _static directory is also copied to the build output
+          cp -R docs/source/_static/* docs/build/html/_static/  # Copy static files to the HTML build
+
       - name: Build Sphinx Documentation
         run: |
           cd docs
@@ -71,6 +79,11 @@ jobs:
         run: |
           cd docs
           ls -la build/html  # List contents of the HTML build directory
+
+      - name: List Static Directory Contents
+        run: |
+          cd docs/build/html/_static
+          ls -la  # List contents of the _static directory
 
       - name: Check Generated HTML Content
         run: |
