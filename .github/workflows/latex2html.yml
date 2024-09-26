@@ -20,7 +20,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y python3 python3-pip pandoc pandoc-citeproc  # Install Pandoc and pandoc-citeproc
-          pip3 install sphinx sphinx-wagtail-theme sphinxcontrib-bibtex  # Install Sphinx and BibTeX extension
+          pip3 install sphinx sphinx-wagtail-theme sphinxcontrib-bibtex pandoc-crossref  # Install Sphinx, BibTeX, and Crossref extension
 
       - name: Verify Installed Packages
         run: pip3 list  # This will list all installed Python packages
@@ -36,9 +36,9 @@ jobs:
           cd docs
           sphinx-quickstart --quiet --sep --project="Handbook" --author="ARCTICS" --release="0.1" --language="en" --makefile
 
-      - name: Convert LaTeX to RST with Bibliography
+      - name: Convert LaTeX to RST with Bibliography and Cross References
         run: |
-          pandoc main.tex --bibliography=references.bib --filter pandoc-citeproc -o docs/source/main.rst  # Convert your LaTeX file to RST format with bibliography
+          pandoc main.tex --bibliography=references.bib --filter pandoc-citeproc --filter pandoc-crossref -o docs/source/main.rst  # Convert LaTeX to RST with bibliography and cross-referencing
 
       - name: Create Master Document (index.rst)
         run: |
@@ -50,7 +50,7 @@ jobs:
           echo "" >> docs/source/index.rst
           echo "   main" >> docs/source/index.rst
 
-      - name: Configure Sphinx for BibTeX
+      - name: Configure Sphinx for Figure Numbering
         run: |
           echo 'extensions.append("sphinx_wagtail_theme")' >> docs/source/conf.py  # Enable Wagtail theme
           echo 'html_theme = "sphinx_wagtail_theme"' >> docs/source/conf.py  # Set Wagtail theme
@@ -59,6 +59,10 @@ jobs:
           echo 'html_static_path = ["_static"]' >> docs/source/conf.py  # Specify the static path
           echo 'html_baseurl = "https://kherli.github.io/Testing/"' >> docs/source/conf.py  # Add the base URL for GitHub Pages
           echo 'master_doc = "index"' >> docs/source/conf.py  # Set the master document
+
+          # Enable figure numbering and format
+          echo 'numfig = True' >> docs/source/conf.py  # Enable figure numbering
+          echo 'numfig_format = {"figure": "Figure %s:", "table": "Table %s:", "code-block": "Listing %s:"}' >> docs/source/conf.py  # Customize figure caption format
 
       - name: Ensure _static Directory Exists
         run: mkdir -p docs/source/_static  # Create _static directory if it doesn't exist
