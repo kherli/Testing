@@ -56,6 +56,7 @@ jobs:
           echo 'extensions = ["sphinx.ext.imgmath", "sphinx_material"]' >> docs/source/conf.py  # Enable LaTeX for images
           echo 'html_theme_options = {"nav_title": "Handbook", "color_primary": "indigo", "color_accent": "pink", "repo_url": "https://github.com/bashtage/sphinx-material/", "repo_name": "Handbook"}' >> docs/source/conf.py
           echo 'html_static_path = ["_static"]' >> docs/source/conf.py  # Specify the static path
+          echo 'html_baseurl = "https://kherli.github.io/Testing/"' >> docs/source/conf.py  # Add the base URL for GitHub Pages
           echo 'master_doc = "index"' >> docs/source/conf.py  # Set the master document
 
       - name: Ensure _static Directory Exists
