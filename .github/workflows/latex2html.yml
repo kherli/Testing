@@ -20,7 +20,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y python3 python3-pip pandoc pandoc-citeproc  # Install Pandoc and pandoc-citeproc
-          pip3 install sphinx sphinx-wagtail-theme sphinxcontrib-bibtex pandoc-crossref  # Install Sphinx, BibTeX, and Crossref extension
+          pip3 install sphinx sphinx-wagtail-theme sphinxcontrib-bibtex pandoc-crossref  # Install Sphinx, BibTeX extension, and pandoc-crossref
 
       - name: Verify Installed Packages
         run: pip3 list  # This will list all installed Python packages
@@ -50,7 +50,7 @@ jobs:
           echo "" >> docs/source/index.rst
           echo "   main" >> docs/source/index.rst
 
-      - name: Configure Sphinx for Figure Numbering
+      - name: Configure Sphinx for Figure Numbering and BibTeX
         run: |
           echo 'extensions.append("sphinx_wagtail_theme")' >> docs/source/conf.py  # Enable Wagtail theme
           echo 'html_theme = "sphinx_wagtail_theme"' >> docs/source/conf.py  # Set Wagtail theme
@@ -105,4 +105,4 @@ jobs:
           # Push changes to the gh-pages branch
           git push --force origin gh-pages  # Use --force to overwrite if needed
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Use the GitHub token for authentication
+         
