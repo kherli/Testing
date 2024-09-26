@@ -54,7 +54,7 @@ jobs:
         run: |
           echo 'html_theme = "sphinx_material"' >> docs/source/conf.py  # Set Material theme
           echo 'extensions = ["sphinx.ext.imgmath", "sphinx_material"]' >> docs/source/conf.py  # Enable LaTeX for images
-          echo 'html_theme_options = {"nav_title": "Handbook", "color_primary": "indigo", "color_accent": "pink", "repo_url": "https://github.com/YOUR_REPO", "repo_name": "Handbook"}' >> docs/source/conf.py
+          echo 'html_theme_options = {"nav_title": "Handbook", "color_primary": "indigo", "color_accent": "pink", "repo_url": "https://github.com/bashtage/sphinx-material/", "repo_name": "Handbook"}' >> docs/source/conf.py
           echo 'html_static_path = ["_static"]' >> docs/source/conf.py  # Specify the static path
           echo 'master_doc = "index"' >> docs/source/conf.py  # Set the master document
 
