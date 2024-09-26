@@ -42,13 +42,13 @@ jobs:
 
       - name: Create Master Document (index.rst)
         run: |
-          echo "Welcome to My Project's documentation!" > docs/index.rst
-          echo "" >> docs/index.rst
-          echo ".. toctree::" >> docs/index.rst
-          echo "   :maxdepth: 2" >> docs/index.rst
-          echo "   :caption: Contents:" >> docs/index.rst
-          echo "" >> docs/index.rst
-          echo "   source/main" >> docs/index.rst  # Ensure it points to the correct path for main.rst
+          echo "Welcome to My Project's documentation!" > docs/source/index.rst
+          echo "" >> docs/source/index.rst
+          echo ".. toctree::" >> docs/source/index.rst
+          echo "   :maxdepth: 2" >> docs/source/index.rst
+          echo "   :caption: Contents:" >> docs/source/index.rst
+          echo "" >> docs/source/index.rst
+          echo "   source/main" >> docs/source/index.rst  # Ensure it points to the correct path for main.rst
 
       - name: Configure Sphinx
         run: |
