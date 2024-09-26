@@ -105,4 +105,4 @@ jobs:
           # Push changes to the gh-pages branch
           git push --force origin gh-pages  # Use --force to overwrite if needed
         env:
-         
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Use the GitHub token for authentication
