@@ -19,26 +19,11 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y python3 python3-pip wget jq  # Install required packages
-
-          # Fetch the latest stable Pandoc version
-          LATEST_VERSION=$(curl -s https://api.github.com/repos/jgm/pandoc/releases/latest | jq -r '.tag_name')
-          DEB_PACKAGE="pandoc-${LATEST_VERSION:1}-1-amd64.deb"
-          wget "https://github.com/jgm/pandoc/releases/download/${LATEST_VERSION}/${DEB_PACKAGE}"  # Download Pandoc
-          sudo dpkg -i "${DEB_PACKAGE}"  # Install Pandoc
-          sudo apt-get install -f  # Fix any dependency issues
-
-      - name: Install pandoc-crossref
-        run: |
-          wget https://github.com/lierdakil/pandoc-crossref/releases/latest/download/pandoc-crossref-Linux.tar.xz  # Download pandoc-crossref
-          tar -xf pandoc-crossref-Linux.tar.xz  # Extract it
-          sudo mv pandoc-crossref /usr/local/bin/  # Move it to the bin directory
+          sudo apt-get install -y python3 python3-pip pandoc pandoc-citeproc  # Install Pandoc and pandoc-citeproc
+          pip3 install sphinx sphinx-wagtail-theme sphinxcontrib-bibtex  # Install Sphinx and BibTeX extension
 
       - name: Verify Installed Packages
-        run: |
-          pandoc --version  # Verify Pandoc installation
-          pandoc-crossref --version  # Verify pandoc-crossref installation
-          pip3 list  # List installed Python packages
+        run: pip3 list  # This will list all installed Python packages
 
       - name: Clean Build Directory
         run: rm -rf docs/build/html  # Clean previous builds
@@ -51,9 +36,9 @@ jobs:
           cd docs
           sphinx-quickstart --quiet --sep --project="Handbook" --author="ARCTICS" --release="0.1" --language="en" --makefile
 
-      - name: Convert LaTeX to RST with Bibliography and Cross References
+      - name: Convert LaTeX to RST with Bibliography
         run: |
-          pandoc main.tex --bibliography=references.bib --filter pandoc-citeproc --filter pandoc-crossref -o docs/source/main.rst  # Convert LaTeX to RST with bibliography and cross-referencing
+          pandoc main.tex --bibliography=references.bib --filter pandoc-citeproc -o docs/source/main.rst  # Convert your LaTeX file to RST format with bibliography
 
       - name: Create Master Document (index.rst)
         run: |
@@ -65,7 +50,7 @@ jobs:
           echo "" >> docs/source/index.rst
           echo "   main" >> docs/source/index.rst
 
-      - name: Configure Sphinx for Figure Numbering and BibTeX
+      - name: Configure Sphinx for BibTeX
         run: |
           echo 'extensions.append("sphinx_wagtail_theme")' >> docs/source/conf.py  # Enable Wagtail theme
           echo 'html_theme = "sphinx_wagtail_theme"' >> docs/source/conf.py  # Set Wagtail theme
@@ -74,10 +59,6 @@ jobs:
           echo 'html_static_path = ["_static"]' >> docs/source/conf.py  # Specify the static path
           echo 'html_baseurl = "https://kherli.github.io/Testing/"' >> docs/source/conf.py  # Add the base URL for GitHub Pages
           echo 'master_doc = "index"' >> docs/source/conf.py  # Set the master document
-
-          # Enable figure numbering and format
-          echo 'numfig = True' >> docs/source/conf.py  # Enable figure numbering
-          echo 'numfig_format = {"figure": "Figure %s:", "table": "Table %s:", "code-block": "Listing %s:"}' >> docs/source/conf.py  # Customize figure caption format
 
       - name: Ensure _static Directory Exists
         run: mkdir -p docs/source/_static  # Create _static directory if it doesn't exist
@@ -111,4 +92,13 @@ jobs:
           git checkout -B gh-pages  # Creates the branch if it doesn't exist or resets it
 
           # Copy generated HTML to the root of the gh-pages branch
-         
+          cp -R docs/build/html/* ./  # Copies the built files
+
+          # Add and commit the changes
+          git add .
+          git commit -m "Deploy Sphinx documentation" || echo "No changes to commit"  # Prevent errors if no changes
+
+          # Push changes to the gh-pages branch
+          git push --force origin gh-pages  # Use --force to overwrite if needed
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Use the GitHub token for authentication
