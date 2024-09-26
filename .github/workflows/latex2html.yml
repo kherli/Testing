@@ -22,9 +22,9 @@ jobs:
           # Install required packages
           sudo apt-get install -y python3 python3-pip pandoc-citeproc wget  # Install Python, pip, and pandoc-citeproc
 
-          # Install the latest stable version of Pandoc
-          wget https://github.com/jgm/pandoc/releases/latest/download/pandoc-*.deb
-          sudo dpkg -i pandoc-*.deb
+          # Download and install the latest stable version of Pandoc
+          wget https://github.com/jgm/pandoc/releases/download/3.4.1/pandoc-3.4.1-1-amd64.deb
+          sudo dpkg -i pandoc-3.4.1-1-amd64.deb
           sudo apt-get install -f  # Fix any dependency issues
 
       - name: Install pandoc-crossref
