@@ -40,31 +40,31 @@ jobs:
         run: |
           pandoc main.tex --bibliography=references.bib --filter pandoc-citeproc -o docs/source/main.rst  # Convert your LaTeX file to RST format with bibliography
 
-- name: Create Master Document (index.rst)
-  run: |
-    echo "**Hello and Welcome!**" > docs/source/index.rst  # Make the title bold
-    echo "" >> docs/source/index.rst
-    echo "We are a team of scientists and citizen scientists, all united by a shared passion for the aurora! Together, in the Auroral Research Coordination: Towards Internationalised Citizen Science (ARCTICS) group, we’ve combined our expertise to create two valuable resources for the aurora community." >> docs/source/index.rst
-    echo "" >> docs/source/index.rst
-    echo "Our Aurora Field Guide provides examples of various types of auroras, helping you recognize and identify different forms in your own photographs. Meanwhile, our Aurora Handbook delves deeper into aurora chasing, capturing images for scientific research, and contributing to our collective understanding. We explain the process of submitting your photos, how collaborations between professional scientists and citizen scientists unfold, and highlight key discoveries that have emerged through this teamwork." >> docs/source/index.rst
-    echo "" >> docs/source/index.rst
-    echo "These guides are available to you free of charge, and we hope that you enjoy them!" >> docs/source/index.rst
-    echo "" >> docs/source/index.rst
-    echo "**Aurora Field Guide for Citizen Scientist**" >> docs/source/index.rst  # Add bold section title
-    echo "" >> docs/source/index.rst
-    echo ".. _field_guide_image:" >> docs/source/index.rst  # Create a label for the image
-    echo ".. image:: _static/Field_Guide_Cover.jpg" >> docs/source/index.rst  # Add image from static folder
-    echo "   :alt: Aurora Field Guide Cover" >> docs/source/index.rst
-    echo "   :align: center" >> docs/source/index.rst
-    echo "" >> docs/source/index.rst
-    echo "Click on the image for the **Aurora Field Guide**: " >> docs/source/index.rst
-    echo "\`Click Here for the Aurora Field Guide <_static/Aurora_Field_Guide.pdf>\`_" >> docs/source/index.rst
-    echo "" >> docs/source/index.rst
-    echo ".. toctree::" >> docs/source/index.rst
-    echo "   :maxdepth: 2" >> docs/source/index.rst
-    echo "   :caption: Contents:" >> docs/source/index.rst
-    echo "" >> docs/source/index.rst
-    echo "   main" >> docs/source/index.rst
+      - name: Create Master Document (index.rst)
+        run: |
+          echo "**Hello and Welcome!**" > docs/source/index.rst  # Make the title bold
+          echo "" >> docs/source/index.rst
+          echo "We are a team of scientists and citizen scientists, all united by a shared passion for the aurora! Together, in the Auroral Research Coordination: Towards Internationalised Citizen Science (ARCTICS) group, we’ve combined our expertise to create two valuable resources for the aurora community." >> docs/source/index.rst
+          echo "" >> docs/source/index.rst
+          echo "Our Aurora Field Guide provides examples of various types of auroras, helping you recognize and identify different forms in your own photographs. Meanwhile, our Aurora Handbook delves deeper into aurora chasing, capturing images for scientific research, and contributing to our collective understanding. We explain the process of submitting your photos, how collaborations between professional scientists and citizen scientists unfold, and highlight key discoveries that have emerged through this teamwork." >> docs/source/index.rst
+          echo "" >> docs/source/index.rst
+          echo "These guides are available to you free of charge, and we hope that you enjoy them!" >> docs/source/index.rst
+          echo "" >> docs/source/index.rst
+          echo "**Aurora Field Guide for Citizen Scientist**" >> docs/source/index.rst  # Add bold section title
+          echo "" >> docs/source/index.rst
+          echo ".. _field_guide_image:" >> docs/source/index.rst  # Create a label for the image
+          echo ".. image:: _static/Field_Guide_Cover.jpg" >> docs/source/index.rst  # Add image from static folder
+          echo "   :alt: Aurora Field Guide Cover" >> docs/source/index.rst
+          echo "   :align: center" >> docs/source/index.rst
+          echo "" >> docs/source/index.rst
+          echo "Click on the image for the **Aurora Field Guide**: " >> docs/source/index.rst
+          echo "\`Click Here for the Aurora Field Guide <_static/Aurora_Field_Guide.pdf>\`_" >> docs/source/index.rst
+          echo "" >> docs/source/index.rst
+          echo ".. toctree::" >> docs/source/index.rst
+          echo "   :maxdepth: 2" >> docs/source/index.rst
+          echo "   :caption: Contents:" >> docs/source/index.rst
+          echo "" >> docs/source/index.rst
+          echo "   main" >> docs/source/index.rst
 
 
       - name: Copy Image to _static
