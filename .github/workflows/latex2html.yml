@@ -56,7 +56,6 @@ jobs:
           echo "   :alt: Aurora Field Guide Cover" >> docs/source/index.rst
           echo "   :align: center" >> docs/source/index.rst
           echo "" >> docs/source/index.rst
-          echo "Click here for the **Aurora Field Guide**: " >> docs/source/index.rst
           echo "\`Click Here for the Aurora Field Guide <_static/Aurora_Field_Guide.pdf>\`_" >> docs/source/index.rst
           echo "" >> docs/source/index.rst
           echo ".. toctree::" >> docs/source/index.rst
