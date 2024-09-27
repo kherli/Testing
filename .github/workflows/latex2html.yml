@@ -52,7 +52,7 @@ jobs:
           echo "" >> docs/source/index.rst
           echo "**Aurora Field Guide for Citizen Scientist**" >> docs/source/index.rst  # Add bold section title
           echo "" >> docs/source/index.rst
-          echo ".. image:: _static/Field_Guide_cover.jpg" >> docs/source/index.rst  # Add image from root directory
+          echo ".. image:: _static/Field_Guide_Cover.jpg" >> docs/source/index.rst  # Add image from root directory
           echo "   :alt: Aurora Field Guide Cover" >> docs/source/index.rst
           echo "   :align: center" >> docs/source/index.rst
           echo "" >> docs/source/index.rst
@@ -65,7 +65,7 @@ jobs:
       - name: Copy Image to _static
         run: |
           mkdir -p docs/source/_static  # Ensure _static directory exists
-          cp Field_Guide_cover.jpg docs/source/_static/  # Copy image from root to _static directory
+          cp Field_Guide_Cover.jpg docs/source/_static/  # Copy image from root to _static directory
 
 
       - name: Configure Sphinx for BibTeX
