@@ -65,6 +65,11 @@ jobs:
           echo "" >> docs/source/index.rst
           echo "   main" >> docs/source/index.rst
 
+      - name: Copy Image to _static
+        run: |
+          mkdir -p docs/source/_static  # Ensure _static directory exists
+          cp Field_Guide_Cover.jpg docs/source/_static/  # Copy image from root to _static directory
+
       - name: Configure Sphinx for BibTeX
         run: |
           echo 'extensions.append("sphinx_wagtail_theme")' >> docs/source/conf.py  # Enable Wagtail theme
