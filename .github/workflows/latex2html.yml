@@ -51,11 +51,10 @@ jobs:
           echo "These guides are available to you free of charge, and we hope that you enjoy them! Happy aurora hunting from the ARCTICS team!" >> docs/source/index.rst
           echo "" >> docs/source/index.rst
           echo "" >> docs/source/index.rst
-          echo "Both guides are licensed under a Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0). To cite the work we ask that you use the following:" >> docs/source/index.rst  
-          echo "" >> docs/source/index.rst
+          echo "Both guides are licensed under a Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0). To cite the work, we ask that you use the following: " >> docs/source/index.rst  
           echo ".. raw:: html" >> docs/source/index.rst
           echo "" >> docs/source/index.rst
-          echo "   <a href='https://zenodo.org/doi/10.5281/zenodo.13837258'><img src='https://zenodo.org/badge/862822419.svg' alt='DOI'></a>" >> docs/source/index.rst
+          echo "   <a href='https://zenodo.org/doi/10.5281/zenodo.13837258'><img src='https://zenodo.org/badge/862822419.svg' alt='DOI' style='display:inline-block; vertical-align:middle;'></a>" >> docs/source/index.rst
           echo "" >> docs/source/index.rst
           echo "**Aurora Field Guide for Citizen Science**" >> docs/source/index.rst  # Add bold section title
           echo "" >> docs/source/index.rst
@@ -76,6 +75,7 @@ jobs:
           echo "   :caption: **Contents**:" >> docs/source/index.rst
           echo "" >> docs/source/index.rst
           echo "   main" >> docs/source/index.rst
+
 
       - name: Copy Images to _static
         run: |
