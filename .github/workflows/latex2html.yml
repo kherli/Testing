@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3  # Updated to use the latest version
+        uses: actions/checkout@v2
 
       - name: Install Dependencies
         run: |
@@ -50,16 +50,16 @@ jobs:
           echo "" >> docs/source/index.rst
           echo "These guides are available to you free of charge, and we hope that you enjoy them! Happy aurora hunting from the ARCTICS team!" >> docs/source/index.rst
           echo "" >> docs/source/index.rst
-          echo "Both guides are licensed under a Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0). To cite the work, we ask that you use the following:" >> docs/source/index.rst
-          echo "" >> docs/source/index.rst
           echo ".. raw:: html" >> docs/source/index.rst
           echo "" >> docs/source/index.rst
           echo "   <a href='https://zenodo.org/doi/10.5281/zenodo.13837258' style='display:inline-block; vertical-align:middle;'>" >> docs/source/index.rst
           echo "      <img src='https://zenodo.org/badge/862822419.svg' alt='DOI'>" >> docs/source/index.rst
           echo "   </a>" >> docs/source/index.rst
           echo "" >> docs/source/index.rst
-          echo "" >> docs/source/index.rst  # Additional space for separation
-          echo "" >> docs/source/index.rst  # Empty line for spacing
+          echo "To cite the work, we ask that you use the above doi. Both guides are licensed under a Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0)." >> docs/source/index.rst
+          echo "" >> docs/source/index.rst
+          echo "" >> docs/source/index.rst
+          echo "" >> docs/source/index.rst  # Add a blank line for spacing
           echo "**Aurora Field Guide for Citizen Science**" >> docs/source/index.rst  # Add bold section title
           echo "" >> docs/source/index.rst
           echo ".. image:: _static/Field_Guide_Cover.jpg" >> docs/source/index.rst  # Add image from static folder
@@ -80,6 +80,9 @@ jobs:
           echo "" >> docs/source/index.rst
           echo "   main" >> docs/source/index.rst
 
+
+
+
       - name: Copy Images to _static
         run: |
           mkdir -p docs/source/_static  # Ensure _static directory exists
@@ -96,22 +99,6 @@ jobs:
           echo 'html_static_path = ["_static"]' >> docs/source/conf.py  # Specify the static path
           echo 'html_baseurl = "https://kherli.github.io/Testing/"' >> docs/source/conf.py  # Add the base URL for GitHub Pages
           echo 'master_doc = "index"' >> docs/source/conf.py  # Set the master document
-          
-          # Add repository link for "Edit on GitHub" button
-          echo 'html_theme_options = {' >> docs/source/conf.py
-          echo '    "repository_url": "https://github.com/kherli/Testing",' >> docs/source/conf.py  # Update with your repo URL
-          echo '    "use_repository_button": True,' >> docs/source/conf.py
-          echo '}' >> docs/source/conf.py
-
-          # Add custom CSS to hide footer items
-          echo 'html_css_files = ["custom.css"]' >> docs/source/conf.py  # Link to your custom CSS file
-          echo 'custom_css = """' >> docs/source/conf.py
-          echo '/* Hide Wagtail footer items */' >> docs/source/conf.py
-          echo '.footer {' >> docs/source/conf.py
-          echo '    display: none;' >> docs/source/conf.py
-          echo '}' >> docs/source/conf.py
-          echo '"""' >> docs/source/conf.py
-
 
       - name: Ensure _static Directory Exists
         run: mkdir -p docs/source/_static  # Create _static directory if it doesn't exist
@@ -130,10 +117,6 @@ jobs:
         run: |
           cd docs/build/html/_static
           ls -la  # List contents of the _static directory
-
-      - name: Check Generated HTML for Edit Link
-        run: |
-          grep -i "edit on github" docs/build/html/index.html || echo "Edit link not found in index.html"
 
       - name: Check Generated HTML Content
         run: |
@@ -158,4 +141,4 @@ jobs:
           # Push changes to the gh-pages branch
           git push --force origin gh-pages  # Use --force to overwrite if needed
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Use the provided GitHub token
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Use the GitHub token for authentication
