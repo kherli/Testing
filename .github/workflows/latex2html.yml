@@ -97,7 +97,7 @@ jobs:
           echo 'html_baseurl = "https://kherli.github.io/Testing/"' >> docs/source/conf.py  # Add the base URL for GitHub Pages
           echo 'master_doc = "index"' >> docs/source/conf.py  # Set the master document
           
-          # Add repository link for "View Source" button
+          # Add repository link for "Edit on GitHub" button
           echo 'html_theme_options = {' >> docs/source/conf.py
           echo '    "repository_url": "https://github.com/kherli/Testing",' >> docs/source/conf.py  # Update with your repo URL
           echo '    "use_repository_button": True,' >> docs/source/conf.py
@@ -144,4 +144,4 @@ jobs:
           # Push changes to the gh-pages branch
           git push --force origin gh-pages  # Use --force to overwrite if needed
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Use the GitHub token for authentication
+          GITHUB_TOKEN: ${{ secrets
