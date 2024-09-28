@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3  # Updated to use the latest version
 
       - name: Install Dependencies
         run: |
@@ -121,6 +121,10 @@ jobs:
           cd docs/build/html/_static
           ls -la  # List contents of the _static directory
 
+      - name: Check Generated HTML for Edit Link
+        run: |
+          grep -i "edit on github" docs/build/html/index.html || echo "Edit link not found in index.html"
+
       - name: Check Generated HTML Content
         run: |
           cd docs
@@ -144,4 +148,4 @@ jobs:
           # Push changes to the gh-pages branch
           git push --force origin gh-pages  # Use --force to overwrite if needed
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Use the provided GitHub token
