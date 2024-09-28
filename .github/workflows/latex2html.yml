@@ -59,6 +59,7 @@ jobs:
           echo "      <img src='https://zenodo.org/badge/862822419.svg' alt='DOI'>" >> docs/source/index.rst
           echo "   </a>" >> docs/source/index.rst
           echo "" >> docs/source/index.rst
+          echo "" >> docs/source/index.rst  # Add a blank line for spacing
           echo "**Aurora Field Guide for Citizen Science**" >> docs/source/index.rst  # Add bold section title
           echo "" >> docs/source/index.rst
           echo ".. image:: _static/Field_Guide_Cover.jpg" >> docs/source/index.rst  # Add image from static folder
