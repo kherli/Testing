@@ -103,6 +103,16 @@ jobs:
           echo '    "use_repository_button": True,' >> docs/source/conf.py
           echo '}' >> docs/source/conf.py
 
+          # Add custom CSS to hide footer items
+          echo 'html_css_files = ["custom.css"]' >> docs/source/conf.py  # Link to your custom CSS file
+          echo 'custom_css = """' >> docs/source/conf.py
+          echo '/* Hide Wagtail footer items */' >> docs/source/conf.py
+          echo '.footer {' >> docs/source/conf.py
+          echo '    display: none;' >> docs/source/conf.py
+          echo '}' >> docs/source/conf.py
+          echo '"""' >> docs/source/conf.py
+
+
       - name: Ensure _static Directory Exists
         run: mkdir -p docs/source/_static  # Create _static directory if it doesn't exist
 
