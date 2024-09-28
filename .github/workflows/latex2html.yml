@@ -80,8 +80,6 @@ jobs:
           echo "" >> docs/source/index.rst
           echo "   main" >> docs/source/index.rst
 
-
-
       - name: Copy Images to _static
         run: |
           mkdir -p docs/source/_static  # Ensure _static directory exists
@@ -98,6 +96,12 @@ jobs:
           echo 'html_static_path = ["_static"]' >> docs/source/conf.py  # Specify the static path
           echo 'html_baseurl = "https://kherli.github.io/Testing/"' >> docs/source/conf.py  # Add the base URL for GitHub Pages
           echo 'master_doc = "index"' >> docs/source/conf.py  # Set the master document
+          
+          # Add repository link for "View Source" button
+          echo 'html_theme_options = {' >> docs/source/conf.py
+          echo '    "repository_url": "https://github.com/kherli/Testing",' >> docs/source/conf.py  # Update with your repo URL
+          echo '    "use_repository_button": True,' >> docs/source/conf.py
+          echo '}' >> docs/source/conf.py
 
       - name: Ensure _static Directory Exists
         run: mkdir -p docs/source/_static  # Create _static directory if it doesn't exist
