@@ -50,7 +50,6 @@ jobs:
           echo "" >> docs/source/index.rst
           echo "These guides are available to you free of charge, and we hope that you enjoy them! Happy aurora hunting from the ARCTICS team!" >> docs/source/index.rst
           echo "" >> docs/source/index.rst
-          echo "" >> docs/source/index.rst
           echo "Both guides are licensed under a Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0). To cite the work, we ask that you use the following:" >> docs/source/index.rst
           echo "" >> docs/source/index.rst
           echo ".. raw:: html" >> docs/source/index.rst
@@ -59,7 +58,8 @@ jobs:
           echo "      <img src='https://zenodo.org/badge/862822419.svg' alt='DOI'>" >> docs/source/index.rst
           echo "   </a>" >> docs/source/index.rst
           echo "" >> docs/source/index.rst
-          echo "" >> docs/source/index.rst  # Add a blank line for spacing
+          echo "" >> docs/source/index.rst  # Additional space for separation
+          echo "" >> docs/source/index.rst  # Empty line for spacing
           echo "**Aurora Field Guide for Citizen Science**" >> docs/source/index.rst  # Add bold section title
           echo "" >> docs/source/index.rst
           echo ".. image:: _static/Field_Guide_Cover.jpg" >> docs/source/index.rst  # Add image from static folder
