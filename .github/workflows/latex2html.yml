@@ -52,6 +52,7 @@ jobs:
           echo "" >> docs/source/index.rst
           echo "" >> docs/source/index.rst
           echo "Both guides are licensed under a Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0), and we ask that if you cite them to use the following DOI:" >> docs/source/index.rst  
+          echo "" >> docs/source/index.rst
           echo ".. raw:: html" >> docs/source/index.rst
           echo "" >> docs/source/index.rst
           echo "   <a href='https://zenodo.org/doi/10.5281/zenodo.13837258'><img src='https://zenodo.org/badge/862822419.svg' alt='DOI'></a>" >> docs/source/index.rst
