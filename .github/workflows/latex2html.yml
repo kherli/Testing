@@ -77,7 +77,7 @@ jobs:
           echo "" >> docs/source/index.rst
           echo ".. toctree::" >> docs/source/index.rst
           echo "   :maxdepth: 2" >> docs/source/index.rst
-          echo "   :caption: **Contents**:" >> docs/source/index.rst
+          echo "   :caption: Contents:" >> docs/source/index.rst
           echo "" >> docs/source/index.rst
           echo "   main" >> docs/source/index.rst
 
