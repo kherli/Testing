@@ -56,8 +56,9 @@ jobs:
           echo "      <img src='https://zenodo.org/badge/862822419.svg' alt='DOI'>" >> docs/source/index.rst
           echo "   </a>" >> docs/source/index.rst
           echo "" >> docs/source/index.rst
-          echo "To cite the work, we ask that you use the above doi. Both guides are licensed under a Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0)." >> docs/source/index.rst
+          echo "To cite the work, we ask that you use the above doi." >> docs/source/index.rst
           echo "" >> docs/source/index.rst
+          echo "Both guides are licensed under a Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0)." >> docs/source/index.rst
           echo "" >> docs/source/index.rst
           echo "" >> docs/source/index.rst  # Add a blank line for spacing
           echo "**Aurora Field Guide for Citizen Science**" >> docs/source/index.rst  # Add bold section title
